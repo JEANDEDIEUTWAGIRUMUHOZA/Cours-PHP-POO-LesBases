@@ -16,9 +16,9 @@
 
   class Employe{
 
-           public $nom;
-           public $prenom;
-           public  $age;
+           private $nom;
+           private  $prenom;
+           private  $age;
 
 
            /*constructeur pour initialiser les attribut d'une instance
@@ -32,19 +32,32 @@
                $this->$age = $age;
            }
 
-           function presentation($nom,$prenom,$age){
-              echo "Je suis ".$this->$nom."".$this->$prenom." et j'ai ".$this->$age. " ans";
+           
+       
+        public function setAge($age){
 
+            if(is_int($age) &&  $age >= 1 && $age <= 120){ //condition pour empecher la modification de l'age en string
+                $this->$age = $age;
+                }else{
+                throw new Exception("L'age de l'Employé devrait etre un entier supérieur à 1 et inférieur à 120");
+               }
+            
             }
 
+          function presentation($nom,$prenom,$age){
+            echo "Je suis ".$this->$nom."".$this->$prenom." et j'ai ".$this->$age. " ans";
+
+              }
           
 
            // presentation("Jean","Dupond",54);
        
       
-        }
+          }
 
         $employe1 = new Employe("Jean ", "Durant", 45);
+        
+        $employe1->setAge(12);
         $employe1->presentation("Jean ", "Durant", 45);
    ?>
 
